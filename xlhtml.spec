@@ -100,7 +100,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc xlhtml/ChangeLog
 %attr(755,root,root) %{_bindir}/cole-config
 %attr(755,root,root) %{_libdir}/lib*.so
-%attr(755,root,root) %{_libdir}/lib*.la
+%{_libdir}/lib*.la
 %{_includedir}/cole
 
 %files static
