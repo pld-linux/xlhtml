@@ -59,7 +59,7 @@ Statyczne biblioteki konwertera Excela 95/97 do HTML.
 
 %build
 %{__libtoolize}
-aclocal
+%{__aclocal}
 %{__autoconf}
 rm -f missing
 %{__automake}
