@@ -5,7 +5,6 @@ Version:	0.5.1
 Release:	3
 License:	GPL
 Group:		Applications/Text
-Vendor:		Steve Grubb <linux_4ever@yahoo.com>
 Source0:	http://chicago.sf.net/%{name}/%{name}.%{version}.tgz
 Patch0:		%{name}-shared.patch
 URL:		http://chicago.sourceforge.net/xlhtml/
@@ -58,10 +57,10 @@ Statyczne biblioteki konwertera Excela 95/97 do HTML.
 %patch -p1
 
 %build
+rm -f missing
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
-rm -f missing
 %{__automake}
 %configure
 
