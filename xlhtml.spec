@@ -7,13 +7,12 @@ License:	GPL
 Group:		Applications/Text
 Vendor:		Steve Grubb <linux_4ever@yahoo.com>
 Source0:	http://chicago.sf.net/%{name}/%{name}.%{version}.tgz
+Patch0:		%{name}-shared.patch
 URL:		http://chicago.sourceforge.net/xlhtml/
-# project is continued at link above
-#URL:		http://www.xlhtml.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
-Provides:	xlHtml
+Obsoletes:	xlHtml
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -33,7 +32,7 @@ Summary:	Excel 95/97 to HTML converter development resources
 Summary(pl):	Zasoby programistyczne xlhtml
 Group:		Applications/Text
 Requires:	%{name} = %{version}
-Provides:	xlHtml-devel
+Obsoletes:	xlHtml-devel
 
 %description devel
 Excel 95/97 to HTML converter development resources.
@@ -46,7 +45,7 @@ Summary:	Excel 95/97 to HTML converter static libraries
 Summary(pl):	Statyczne biblioteki xlhtml
 Group:		Applications/Text
 Requires:	%{name}-devel = %{version}
-Provides:	xlHtml-static
+Obsoletes:	xlHtml-static
 
 %description static
 Excel 95/97 to HTML converter static libraries.
@@ -56,6 +55,7 @@ Statyczne biblioteki konwertera Excela 95/97 do HTML.
 
 %prep
 %setup -q -n %{name}
+%patch -p1
 
 %build
 %{__libtoolize}
@@ -71,13 +71,12 @@ rm -f missing
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT \
-	coleaclocaldir=%{_aclocaldir}
+	DESTDIR=$RPM_BUILD_ROOT
 
-#install cole-config $RPM_BUILD_ROOT%{_bindir}
+install cole/cole-config $RPM_BUILD_ROOT%{_bindir}
 
-install -d $RPM_BUILD_ROOT%{_mandir}/man1
-install xlhtml/xlhtml.1 ppthtml/ppthtml.1 $RPM_BUILD_ROOT%{_mandir}/man1
+#install -d $RPM_BUILD_ROOT%{_mandir}/man1
+#install xlhtml/xlhtml.1 ppthtml/ppthtml.1 $RPM_BUILD_ROOT%{_mandir}/man1
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -99,11 +98,10 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %doc xlhtml/ChangeLog
-#%attr(755,root,root) %{_bindir}/cole-config
+%attr(755,root,root) %{_bindir}/cole-config
 %attr(755,root,root) %{_libdir}/lib*.so
 %attr(755,root,root) %{_libdir}/lib*.la
 %{_includedir}/cole
-%{_aclocaldir}/cole.m4
 
 %files static
 %defattr(644,root,root,755)

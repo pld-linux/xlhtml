@@ -1,0 +1,63 @@
+--- xlhtml/cole/Makefile.am.orig	Thu Apr 18 19:22:08 2002
++++ xlhtml/cole/Makefile.am	Sun Jul 14 22:03:55 2002
+@@ -2,7 +2,10 @@
+ 
+ EXTRA_DIST = README-cole README-CVS DOWNLOAD ChangeLog ChangeLog-from1to2 TODO THANKS AUTHORS BUGS doc/* examples/* utils/* 
+ 
+-noinst_LIBRARIES = libcole.a 
+-libcole_a_SOURCES = cole.c internal.c oledecod.c olecod.c support.c version.c internal.h support.h 
++lib_LTLIBRARIES = libcole.la
++libcole_la_SOURCES = cole.c internal.c oledecod.c olecod.c support.c version.c internal.h support.h 
++libcole_la_LDFLAGS = -version-info @VERSION_INFO@
+ #AM_CFLAGS = -Wall -Wcast-align -Wpointer-arith 
+ 
++coleincdir = $(includedir)/cole
++coleinc_HEADERS = cole.h
+--- xlhtml/xlhtml/Makefile.am.orig	Wed May 15 03:58:35 2002
++++ xlhtml/xlhtml/Makefile.am	Sun Jul 14 22:04:56 2002
+@@ -8,7 +8,7 @@
+ man_MANS = xlhtml.1
+ bin_SCRIPTS = nsopen nsxlview
+ bin_PROGRAMS = xlhtml
+-LDADD = ../cole/libcole.a -lm
++LDADD = -L../cole -lcole -lm
+ xlhtml_SOURCES = support.c xlhtml.c html.c ascii.c xml.c 
+ xldump_SOURCES = xldump.c 
+ xlcdump_SOURCES = xlcdump.c 
+--- xlhtml/ppthtml/Makefile.am.orig	Thu Apr 18 19:22:08 2002
++++ xlhtml/ppthtml/Makefile.am	Sun Jul 14 22:05:23 2002
+@@ -8,6 +8,6 @@
+ man_MANS = ppthtml.1
+ bin_SCRIPTS = nspptview
+ bin_PROGRAMS = ppthtml
+-LDADD = ../cole/libcole.a
++LDADD = -L../cole -lcole
+ ppthtml_SOURCES = ppthtml.c 
+ #AM_CFLAGS = -Wall -Wshadow -Wcast-align -Wpointer-arith 
+--- xlhtml/configure.in.orig	Fri Jun  7 17:16:16 2002
++++ xlhtml/configure.in	Sun Jul 14 22:08:03 2002
+@@ -17,7 +17,7 @@
+ AM_CONFIG_HEADER(config.h)
+ 
+ AC_PROG_CC
+-AC_PROG_RANLIB
++AC_PROG_LIBTOOL
+ AC_ISC_POSIX
+ 
+ AC_CHECK_HEADERS(malloc.h)
+@@ -54,11 +54,14 @@
+ dnl     Set this too (I don't know how to do it automatically =) ):
+ COLE_MAJOR_PLUS_COLE_MINOR=2
+ dnl
++VERSION_INFO=$COLE_MAJOR_PLUS_COLE_MINOR:$COLE_MICRO:$COLE_MINOR
++AC_DEFINE_UNQUOTED(VERSION_INFO,"${VERSION_INFO}",Define cole rev version)
++AC_SUBST(VERSION_INFO)
+ AC_SUBST(COLE_MAJOR)
+ AC_SUBST(COLE_MINOR)
+ AC_SUBST(COLE_MICRO)
+   
+ 
+-AC_OUTPUT([Makefile cole/Makefile cole/version.c cole/cole.h xlhtml/Makefile ppthtml/Makefile])
++AC_OUTPUT([Makefile cole/Makefile cole/version.c cole/cole.h cole/cole-config xlhtml/Makefile ppthtml/Makefile])
+ 
+ 
