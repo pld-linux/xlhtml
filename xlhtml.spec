@@ -6,7 +6,7 @@ Release:	2
 License:	GPL
 Group:		Applications/Text
 Vendor:		Steve Grubb <linux_4ever@yahoo.com>
-Source0:	http://chicago.sf.net/%{name}/%{name}-%{version}.tar.gz
+Source0:	http://chicago.sf.net/%{name}/%{name}.%{version}.tgz
 URL:		http://chicago.sourceforge.net/xlhtml/
 # project is continued at link above
 #URL:		http://www.xlhtml.org/
@@ -55,7 +55,7 @@ Excel 95/97 to html converter static libraries.
 Statyczne biblioteki konwertera Excela 95/97 do HTML.
 
 %prep
-%setup -q
+%setup -q -n %{name}
 
 %build
 %{__libtoolize}
@@ -74,12 +74,12 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT \
 	coleaclocaldir=%{_aclocaldir}
 
-install cole-config $RPM_BUILD_ROOT%{_bindir}
+#install cole-config $RPM_BUILD_ROOT%{_bindir}
 
 install -d $RPM_BUILD_ROOT%{_mandir}/man1
-install xlHtml/xlHtml.1 pptHtml/pptHtml.1 $RPM_BUILD_ROOT%{_mandir}/man1
+install xlhtml/xlhtml.1 ppthtml/ppthtml.1 $RPM_BUILD_ROOT%{_mandir}/man1
 
-gzip -9nf xlHtml/{README,THANKS,TODO,ChangeLog}
+gzip -9nf xlhtml/{README,THANKS,TODO,ChangeLog}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -93,15 +93,15 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/nsopen
 %attr(755,root,root) %{_bindir}/nsxlview
 %attr(755,root,root) %{_bindir}/nspptview
-%attr(755,root,root) %{_bindir}/xlHtml
-%attr(755,root,root) %{_bindir}/pptHtml
+%attr(755,root,root) %{_bindir}/xlhtml
+%attr(755,root,root) %{_bindir}/ppthtml
 %attr(755,root,root) %{_libdir}/lib*.so.*.*.*
 %{_mandir}/man1/*
 
 %files devel
 %defattr(644,root,root,755)
 %doc xlHtml/ChangeLog.gz
-%attr(755,root,root) %{_bindir}/cole-config
+#%attr(755,root,root) %{_bindir}/cole-config
 %attr(755,root,root) %{_libdir}/lib*.so
 %attr(755,root,root) %{_libdir}/lib*.la
 %{_includedir}/cole
