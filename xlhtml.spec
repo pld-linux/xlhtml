@@ -6,6 +6,7 @@ Release:	3
 License:	GPL
 Group:		Applications/Text
 Source0:	http://chicago.sf.net/%{name}/%{name}.%{version}.tgz
+# Source0-md5:	40d67e79760c067cff2d0f69efacffc4
 Patch0:		%{name}-shared.patch
 URL:		http://chicago.sourceforge.net/xlhtml/
 BuildRequires:	autoconf
