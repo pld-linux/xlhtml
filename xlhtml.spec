@@ -2,7 +2,7 @@ Summary:	Excel 95/97 and PowerPoint to HTML converter
 Summary(pl):	Konwerter z Excela 95/97 oraz PowerPointa do HTML
 Name:		xlhtml
 Version:	0.5.1
-Release:	3
+Release:	4
 License:	GPL
 Group:		Applications/Text
 #Source0:	http://dl.sourceforge.net/chicago/%{name}.%{version}.tgz
