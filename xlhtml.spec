@@ -78,6 +78,8 @@ install cole/cole-config $RPM_BUILD_ROOT%{_bindir}
 #install -d $RPM_BUILD_ROOT%{_mandir}/man1
 #install xlhtml/xlhtml.1 ppthtml/ppthtml.1 $RPM_BUILD_ROOT%{_mandir}/man1
 
+rm -rf xlhtml/contrib/CVS
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
