@@ -56,7 +56,7 @@ Statyczne biblioteki konwertera Excela 95/97 do HTML.
 
 %prep
 %setup -q -n %{name}
-%patch -p1
+%patch0 -p1
 
 %build
 rm -f missing
