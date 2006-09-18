@@ -1,0 +1,187 @@
+--- xlhtml/xlhtml/xlhtml.c.orig	2002-05-16 18:31:32.000000000 +0200
++++ xlhtml/xlhtml/xlhtml.c	2006-09-19 00:39:14.441514500 +0200
+@@ -43,71 +43,71 @@
+ U8 **customColors = 0;
+ char colorTab[MAX_COLORS][8] =
+ {
+-	"000000",	/* FIXME: Need to find these first 8 colors! */
+-	"FFFFFF",
+-	"FFFFFF",
+-	"FFFFFF",
+-	"FFFFFF",
+-	"FFFFFF",
+-	"FFFFFF",
+-	"FFFFFF",
+-	"FFFFFF",	/*0x08 - This one's Black, too ??? */
+-	"FFFFFF", /* This one's normal */
++	"#000000",	/* FIXME: Need to find these first 8 colors! */
++	"#FFFFFF",
++	"#FFFFFF",
++	"#FFFFFF",
++	"#FFFFFF",
++	"#FFFFFF",
++	"#FFFFFF",
++	"#FFFFFF",
++	"#FFFFFF",	/*0x08 - This one's Black, too ??? */
++	"#FFFFFF", /* This one's normal */
+ 	"red",	/*	"FF0000", */
+ 	"lime",	/*	"00FF00", */
+ 	"blue",	/*	"0000FF", */
+-	"FFFF00",
+-	"FF00FF",
++	"#FFFF00",
++	"#FF00FF",
+ 	"aqua",	/*	"00FFFF", */
+-	"800000",	/* 0x10 */
++	"#800000",	/* 0x10 */
+ 	"green",	/*	"008000", */
+ 	"navy",	/*	"000080", */
+-	"808000",
+-	"800080",
++	"#808000",
++	"#800080",
+ 	"teal",	/*	"008080", */
+-	"C0C0C0",
++	"#C0C0C0",
+ 	"gray",	/*	"808080", */
+-	"9999FF",	/* 0x18 */
+-	"993366",
+-	"FFFFCC",
+-	"CCFFFF",
+-	"660066",
+-	"FF8080",
+-	"0066CC",
+-	"CCCCFF",
+-	"000080",
+-	"FF00FF",	/* 0x20 */
+-	"FFFF00",
+-	"00FFFF",
+-	"800080",
+-	"800000",
+-	"008080",
+-	"0000FF",
+-	"00CCFF",	/* 0x28 */
+-	"CCFFFF",
+-	"CCFFCC",
+-	"FFFF99",
+-	"99CCFF",
+-	"FF99CC",
+-	"CC99FF",
+-	"FFCC99",
+-	"3366FF",	/* 0x30 */
+-	"33CCCC",
+-	"99CC00",
+-	"FFCC00",
+-	"FF9900",
+-	"FF6600",
+-	"666699",
+-	"969696",
+-	"003366",	/* 0x38 */
+-	"339966",
+-	"003300",
+-	"333300",
+-	"993300",
+-	"993366",
+-	"333399",
+-	"333333",
+-	"FFFFFF"	/* 0x40 */
++	"#9999FF",	/* 0x18 */
++	"#993366",
++	"#FFFFCC",
++	"#CCFFFF",
++	"#660066",
++	"#FF8080",
++	"#0066CC",
++	"#CCCCFF",
++	"#000080",
++	"#FF00FF",	/* 0x20 */
++	"#FFFF00",
++	"#00FFFF",
++	"#800080",
++	"#800000",
++	"#008080",
++	"#0000FF",
++	"#00CCFF",	/* 0x28 */
++	"#CCFFFF",
++	"#CCFFCC",
++	"#FFFF99",
++	"#99CCFF",
++	"#FF99CC",
++	"#CC99FF",
++	"#FFCC99",
++	"#3366FF",	/* 0x30 */
++	"#33CCCC",
++	"#99CC00",
++	"#FFCC00",
++	"#FF9900",
++	"#FF6600",
++	"#666699",
++	"#969696",
++	"#003366",	/* 0x38 */
++	"#339966",
++	"#003300",
++	"#333300",
++	"#993300",
++	"#993366",
++	"#333399",
++	"#333333",
++	"#FFFFFF"	/* 0x40 */
+ };
+ 
+ int DatesR1904 = 0;	/*!< Flag that the dates are based on McIntosh Dates system */
+@@ -1765,7 +1765,7 @@
+ 					green = (unsigned char)working_buffer[(4*i)+3];
+ 					blue = (unsigned char)working_buffer[(4*i)+4];
+ 					/* printf("%02X%02X%02X\n", (int)red, (int)green, (int)blue); */
+-					sprintf(color_string, "%02X%02X%02X", (int)red, (int)green, (int)blue);
++					sprintf(color_string, "#%02X%02X%02X", (int)red, (int)green, (int)blue);
+ 					customColors[i] = (U8 *)strdup(color_string);
+ 				}
+ 			}
+@@ -2630,7 +2630,7 @@
+ 					{
+ 						if (fgcolor < numCustomColors)
+ 						{
+-							if (strcmp(default_background_color, (char *)customColors[fgcolor-8]) != 0)
++							if (strcmp(default_background_color, ((char *)customColors[fgcolor-8]) + 1) != 0)
+ 								printf(" BGCOLOR=\"%s\"", customColors[fgcolor-8]);
+ 						}
+ 					}
+@@ -2638,7 +2638,7 @@
+ 					{
+ 						if (fgcolor < MAX_COLORS)
+ 						{
+-							if (strcmp(default_background_color, colorTab[fgcolor]) != 0)
++							if (strcmp(default_background_color, colorTab[fgcolor] + (colorTab[fgcolor][0] == '#')) != 0)
+ 								printf(" BGCOLOR=\"%s\"", colorTab[fgcolor]);
+ 						}
+ 					}
+@@ -2657,7 +2657,7 @@
+ 				{	/* if they are all the same...do it...that is if it's different from BLACK */
+ 					if (numCustomColors == 0)	/* Don't do custom borders */
+ 					{
+-						if ((strcmp(colorTab[lcolor], "000000") != 0)&&(strcmp(colorTab[lcolor], "FFFFFF") != 0))
++						if ((strcmp(colorTab[lcolor], "#000000") != 0)&&(strcmp(colorTab[lcolor], "#FFFFFF") != 0))
+ 						{
+ 							if( !xml )
+ 								printf(" BORDERCOLOR=\"%s\"", colorTab[lcolor]);
+@@ -3876,16 +3876,16 @@
+ 			if ((font_array[fnt_idx]->c_idx < numCustomColors)&&use_colors)
+ 				strcpy(color, (char *)customColors[font_array[fnt_idx]->c_idx-8]);
+ 			else
+-				strcpy(color, "000000");
++				strcpy(color, "#000000");
+ 		}
+ 		else
+ 		{
+ 			if ((font_array[fnt_idx]->c_idx < MAX_COLORS)&&use_colors)
+ 				strcpy(color, colorTab[font_array[fnt_idx]->c_idx]);
+ 			else
+-				strcpy(color, "000000");
++				strcpy(color, "#000000");
+ 		}
+-		if (strcmp(color, "000000") != 0)
++		if (strcmp(color, "#000000") != 0)
+ 		{
+ 			if (h->fflag)
+ 				printf(" COLOR=\"%s\"", color);
