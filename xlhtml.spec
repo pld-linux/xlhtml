@@ -2,13 +2,14 @@ Summary:	Excel 95/97 and PowerPoint to HTML converter
 Summary(pl):	Konwerter z Excela 95/97 oraz PowerPointa do HTML
 Name:		xlhtml
 Version:	0.5.1
-Release:	4
+Release:	5
 License:	GPL
 Group:		Applications/Text
 #Source0:	http://dl.sourceforge.net/chicago/%{name}.%{version}.tgz
 Source0:	%{name}.%{version}.tgz
 # Source0-md5:	deeb108545e1848fce5dcb8d84d8a48e
 Patch0:		%{name}-shared.patch
+Patch1:		%{name}-colors.patch
 URL:		http://chicago.sourceforge.net/xlhtml/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -32,7 +33,7 @@ PowerPointa do HTML.
 Summary:	Excel 95/97 to HTML converter development resources
 Summary(pl):	Zasoby programistyczne xlhtml
 Group:		Applications/Text
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 Obsoletes:	xlHtml-devel
 
 %description devel
@@ -45,7 +46,7 @@ Zasoby programistyczne konwertera Excela 95/97 do HTML.
 Summary:	Excel 95/97 to HTML converter static libraries
 Summary(pl):	Statyczne biblioteki xlhtml
 Group:		Applications/Text
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{version}-%{release}
 Obsoletes:	xlHtml-static
 
 %description static
@@ -57,9 +58,9 @@ Statyczne biblioteki konwertera Excela 95/97 do HTML.
 %prep
 %setup -q -n %{name}
 %patch0 -p1
+%patch1 -p1
 
 %build
-rm -f missing
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
