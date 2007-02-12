@@ -1,5 +1,5 @@
 Summary:	Excel 95/97 and PowerPoint to HTML converter
-Summary(pl):	Konwerter z Excela 95/97 oraz PowerPointa do HTML
+Summary(pl.UTF-8):   Konwerter z Excela 95/97 oraz PowerPointa do HTML
 Name:		xlhtml
 Version:	0.5.1
 Release:	5
@@ -23,15 +23,15 @@ convert it to HTML. The output is via standard out so it can be
 re-directed to files or piped to filters or used as a gateway to the
 internet. pptHtml program converts PowerPoint files to HTML.
 
-%description -l pl
-Program xlhtml przyjmuje na wej¶cie pliki Excela 95 lub 97 i
-konwertuje je do HTML, wyrzucaj±c na standardowe wyj¶cie - które mo¿e
-byæ przekierowane do innego filtru. Program pptHtml konwertuje pliki
+%description -l pl.UTF-8
+Program xlhtml przyjmuje na wejÅ›cie pliki Excela 95 lub 97 i
+konwertuje je do HTML, wyrzucajÄ…c na standardowe wyjÅ›cie - ktÃ³re moÅ¼e
+byÄ‡ przekierowane do innego filtru. Program pptHtml konwertuje pliki
 PowerPointa do HTML.
 
 %package devel
 Summary:	Excel 95/97 to HTML converter development resources
-Summary(pl):	Zasoby programistyczne xlhtml
+Summary(pl.UTF-8):   Zasoby programistyczne xlhtml
 Group:		Applications/Text
 Requires:	%{name} = %{version}-%{release}
 Obsoletes:	xlHtml-devel
@@ -39,12 +39,12 @@ Obsoletes:	xlHtml-devel
 %description devel
 Excel 95/97 to HTML converter development resources.
 
-%description devel -l pl
+%description devel -l pl.UTF-8
 Zasoby programistyczne konwertera Excela 95/97 do HTML.
 
 %package static
 Summary:	Excel 95/97 to HTML converter static libraries
-Summary(pl):	Statyczne biblioteki xlhtml
+Summary(pl.UTF-8):   Statyczne biblioteki xlhtml
 Group:		Applications/Text
 Requires:	%{name}-devel = %{version}-%{release}
 Obsoletes:	xlHtml-static
@@ -52,7 +52,7 @@ Obsoletes:	xlHtml-static
 %description static
 Excel 95/97 to HTML converter static libraries.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Statyczne biblioteki konwertera Excela 95/97 do HTML.
 
 %prep
