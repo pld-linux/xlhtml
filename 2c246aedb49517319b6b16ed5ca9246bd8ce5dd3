@@ -1,0 +1,3 @@
+- release 3,
+- regenerate automake/autoconf files (added autoconf, automake to BuildRequires),
+- spec adapterized.
