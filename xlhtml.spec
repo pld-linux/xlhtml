@@ -3,9 +3,9 @@ Summary(pl.UTF-8):	Konwerter z Excela 95/97 oraz PowerPointa do HTML
 Name:		xlhtml
 Version:	0.5.1
 Release:	6
-License:	GPL
+License:	GPL v2+
 Group:		Applications/Text
-#Source0:	http://dl.sourceforge.net/chicago/%{name}.%{version}.tgz
+#Source0:	http://downloads.sourceforge.net/chicago/%{name}.%{version}.tgz
 Source0:	%{name}.%{version}.tgz
 # Source0-md5:	deeb108545e1848fce5dcb8d84d8a48e
 Patch0:		%{name}-shared.patch
@@ -60,10 +60,13 @@ Statyczne biblioteki konwertera Excela 95/97 do HTML.
 %patch0 -p1
 %patch1 -p1
 
+%{__rm} -r xlhtml/contrib/CVS
+
 %build
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
+%{__autoheader}
 %{__automake}
 %configure
 
@@ -76,11 +79,6 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 install cole/cole-config $RPM_BUILD_ROOT%{_bindir}
-
-#install -d $RPM_BUILD_ROOT%{_mandir}/man1
-#install xlhtml/xlhtml.1 ppthtml/ppthtml.1 $RPM_BUILD_ROOT%{_mandir}/man1
-
-rm -rf xlhtml/contrib/CVS
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -96,18 +94,19 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/nspptview
 %attr(755,root,root) %{_bindir}/xlhtml
 %attr(755,root,root) %{_bindir}/ppthtml
-%attr(755,root,root) %{_libdir}/lib*.so.*.*.*
-%attr(755,root,root) %{_libdir}/lib*.so.2
-%{_mandir}/man1/*
+%attr(755,root,root) %{_libdir}/libcole.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libcole.so.2
+%{_mandir}/man1/ppthtml.1*
+%{_mandir}/man1/xlhtml.1*
 
 %files devel
 %defattr(644,root,root,755)
 %doc xlhtml/ChangeLog
 %attr(755,root,root) %{_bindir}/cole-config
-%attr(755,root,root) %{_libdir}/lib*.so
-%{_libdir}/lib*.la
+%attr(755,root,root) %{_libdir}/libcole.so
+%{_libdir}/libcole.la
 %{_includedir}/cole
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/lib*.a
+%{_libdir}/libcole.a
